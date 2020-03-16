@@ -3,60 +3,48 @@
 
 def find_linked_list_length(l):
     current = l
-    length = 0
+    counter = 0
+
     while current:
-        length += 1
+        counter += 1
         current = current.next
 
-    return length
+    return counter
+
+# O(2*n) runtime
+# O(1) space
 
 
-def isListPalindrom(l):
-    '''
-    Palindrom: A string that doesnt change when reversed 
-    it reads the same forward and backwards
-
-    figure out if the elements in the linked list from a valid palindrome
-
-    how would we check if a palindrome is valid in the first place?
-
-
-
-    now that we have a plan for checking if a palindrome is valid how do we adapt that strategy to work on a linked list
-    '''
-    # what data structre to use to hold the nodes to make sure they match
-
-    # if we were using a stack, as were traversing, push every node to the stack
-    # mark the ones we get to as visited and compare the ones we pop from the stacck if all the those match, then
-
-    # figure out the length of the of the linked list by traversing it
-    # move a pointer to the half-way point
-    # add prev pointer to the first half
-
-    # init another pointer, at the middle element
-    # have the pointers traverse in both directions,
-    # check elements on each iteration
-
-    # or walk from both ends towards the middle
+def isListPalindrome(l):
+    # figure out the length of the list
     length = find_linked_list_length(l)
+    # ahead and behind pointers
+    al = l
+    bl = None
 
-    a = l
-    a.prev = None
-
-    # advance a to the mid point of the list
+    # advance the ahead pointer to the midpoint of the list
     for _ in range(length // 2):
-        # set up previous pointers
-        prev = a
-        a = a.next
-        a.prev = prev
+        # while we're advancing the fast pointer, reverse the first
+        # half of the list so that the first half of the list points
+                # backwards
+        prev = al
+        al = al.next
+        prev.next = bl
+        bl = prev
 
-    # init b to the same node as a
-    b = a
+    # check to see if we have a list with an odd number of nodes
+    if length % 2 == 1:
+                # if so, take the middle element as the later of the two
+                # middle elements
+        al = al.next
 
-    # traverse both a and b until a resaches the end of the list
-    while a:
-        if a.value != b.value:
+    # traverse ahead and behind pointers in unison, checking
+        # each pointer's value
+    while al and bl:
+        if al.value != bl.value:
             return False
-        a = a.next
-        b = b.prev
+
+        al = al.next
+        bl = bl.next
+
     return True
