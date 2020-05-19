@@ -28,3 +28,12 @@ function repeated_string(s, n) {
 	const a_ratio = (a_counter * n) / s.length;
 	return Math.ceil(a_ratio);
 }
+
+// this is opimized solution
+function repeatedString(s, n) {
+	const counta = (str) => str.split("").filter((c) => c == "a").length;
+
+	const d = Math.floor(n / s.length);
+	const r = n - s.length * d;
+	return d * counta(s) + counta(s.substr(0, r));
+}
