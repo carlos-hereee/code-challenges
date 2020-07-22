@@ -39,17 +39,3 @@ def countingValleys(n, s):
 
     # it only counts as a valley if we start at sea level and make our way
     # back to sea level
-
-
-if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
-
-    n = int(input())
-
-    s = input()
-
-    result = countingValleys(n, s)
-
-    fptr.write(str(result) + '\n')
-
-    fptr.close()
