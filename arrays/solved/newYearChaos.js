@@ -29,23 +29,35 @@ P:
     
     
  */
-// const q = [1, 2, 5, 3, 7, 8, 6, 4];
 // const q = [2, 1, 5, 3, 4];
 // const q = [2, 5, 1, 3, 4];
+const q = [1, 2, 5, 3, 7, 8, 6, 4];
+// const w = [5, 1, 2, 3, 7, 8, 6, 4];
+
+// const q = [f, w];
 
 function minimunBribes(q) {
 	//  keep track of the minimun bribe
 	let bribe = 0;
+	let isChaotic = false;
 	//  traverse the array
 	for (let i = 0; i < q.length; i++) {
-		// if i is greater than the next on list
-		if (q[i] > q[i + 1]) {
+		// the value of the position has to be greater than the position on the list
+		if (q[i] > i + 1) {
 			// if its by more than 2
-			if (q[i] - q[i + 1] > 2) return "Too chaotic";
-			bribe += q[i] - q[i + 1];
+			if (q[i] - (i + 1) > 2) {
+				// its too chaotic break
+				console.log("Too chaotic");
+				isChaotic = true;
+				break;
+			} else {
+				bribe += q[i] - (i + 1);
+			}
 		}
 	}
-	return bribe;
+	if (isChaotic === false) {
+		console.log(bribe);
+	}
 }
 
 console.log("minumunBribes", minimunBribes(q));
