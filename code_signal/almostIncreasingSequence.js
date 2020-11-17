@@ -31,12 +31,16 @@
     create a counter of 2 
     traverse the array
     if a number is desending order decrease the counter by 1
-    check if the counter is at 0 if its at 0 return false    
+    check if the counter is at 0 if its at 0 return false   
+    
+    
+    
     */
 const sequence = [1, 2, 1, 2];
 // const sequence = [1, 3, 2, 1];
 // const sequence = [1, 3, 2]
 // const sequence = [1, 1, 2, 3, 4, 4];
+
 function almostIncreasingSequence(sequence) {
   var found = false;
   for (var i = 0; i < sequence.length; i++) {
@@ -45,10 +49,10 @@ function almostIncreasingSequence(sequence) {
         return false;
       }
       found = true;
-
       if (i === 1 || i + 1 === sequence.length) {
         continue;
       } else if (sequence[i] > sequence[i - 2]) {
+        z;
         sequence[i - 1] = sequence[i - 2];
       } else if (sequence[i - 1] >= sequence[i + 1]) {
         return false;
