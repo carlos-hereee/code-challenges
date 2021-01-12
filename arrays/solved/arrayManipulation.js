@@ -53,19 +53,22 @@ const queries = [
 
 function manipulation(n, queries) {
   // create the new array
-  const line = Array(n).fill(0);
+  const line = {};
+  // keep track of the max value
+  let maxValue = 0;
   // traverse the queries
   for (let i = 0; i < queries.length; i++) {
     const current = queries[i];
     // add the index value k to the index of the new array
-    const a = current[0];
+    const a = current[0] - 1;
     const b = current[1];
     const k = current[2];
-    for (let index = a - 1; index < b; index++) {
-      line[index] += k;
+    for (let index = a; index < b; index++) {
+      line[index] ? (line[index] = line[index] + k) : (line[index] = k);
+      if (line[index] > maxValue) maxValue = line[index];
     }
   }
-  return Math.max(...line);
+  return maxValue;
 }
 
-console.log("manipulation(arr)", manipulation(n, queries));
+console.log("max : ", manipulation(n, queries));
